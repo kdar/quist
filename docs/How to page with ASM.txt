@@ -1,0 +1,23 @@
+First I used a resource hacker in order to find out the number assigned to the
+Page menu item. I then opened up ventrilo in OllyDbg and searched for the hex
+conversion of this number in the comment section of the disassembly. The reasoning
+is that usually how people program win32 applications is that they have the windows
+process function which handles all the messages coming to the window. They then use
+a switch statement to determine what button or menu item was pressed. So that's exactly
+what we are searching for.
+
+Unfortunately, this technique does not work in IDA because IDA does not put that hex
+number in the comments. It instead displays an offset (which doesn't help me at all).
+Now once you find the case statement of this number, scroll up until you find the main
+function that handles all these case statements.
+
+Now in order to do a page, you simply call this function and pass the number to it. The only
+problem now is this function is actually a method of an object. So you have to use assembly
+in order to call a method of an unknown object that you have the address of. Look at the code
+on how to do that. 
+
+I found the object's location in memory by first setting a breakpoint on the function and
+then looking inside the ecx register (since this is called with __thiscall, and that's where
+the object's addresses is placed). Once I got that I opened up MHS and searched for a pointer
+to this location. Now in the code all I have to do is dereference this pointer and I have the
+address of the object. So I can use ASM to call the method of this object.

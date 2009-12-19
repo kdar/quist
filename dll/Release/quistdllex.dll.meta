@@ -1,0 +1,78 @@
+  Quist.PreviewDlg.resources - Embedded, ContainedInManifestFile, 
+  Quist.Properties.Resources.resources - Embedded, ContainedInManifestFile, 
+  Quist.AboutDlg.resources - Embedded, ContainedInManifestFile, 
+  Quist.PageBombSettingsDlg.resources - Embedded, ContainedInManifestFile, 
+Assembly QuistDllEx, Version=1.0.5.1, Culture=neutral, PublicKeyToken=536eb4303b96f79d: 
+	hash=SHA1, flags=PublicKey
+Assembly System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=SHA1, flags=None
+Class Quist.PageBombSettingsDlg: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Decimal Pages 'get set' : 
+    System.Decimal Interval 'get set' : 
+  Events:
+    SendEvent Send: 
+  Methods:
+    add_Send(SendEvent): PrivateScope, Public, HideBySig, SpecialName
+    remove_Send(SendEvent): PrivateScope, Public, HideBySig, SpecialName
+    get_Pages(): PrivateScope, Public, HideBySig, SpecialName
+    set_Pages(Decimal): PrivateScope, Public, HideBySig, SpecialName
+    get_Interval(): PrivateScope, Public, HideBySig, SpecialName
+    set_Interval(Decimal): PrivateScope, Public, HideBySig, SpecialName
+Class Quist.PageBombSettingsDlg+SendEvent: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    BeginInvoke(AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Quist.AboutDlg: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String AssemblyTitle 'get ' : 
+    System.String AssemblyVersion 'get ' : 
+    System.String AssemblyDescription 'get ' : 
+    System.String AssemblyProduct 'get ' : 
+    System.String AssemblyCopyright 'get ' : 
+    System.String AssemblyCompany 'get ' : 
+  Methods:
+    get_AssemblyTitle(): PrivateScope, Public, HideBySig, SpecialName
+    get_AssemblyVersion(): PrivateScope, Public, HideBySig, SpecialName
+    get_AssemblyDescription(): PrivateScope, Public, HideBySig, SpecialName
+    get_AssemblyProduct(): PrivateScope, Public, HideBySig, SpecialName
+    get_AssemblyCopyright(): PrivateScope, Public, HideBySig, SpecialName
+    get_AssemblyCompany(): PrivateScope, Public, HideBySig, SpecialName
+Class Quist.PreviewDlg: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Comment 'get set' : 
+    System.String Url 'get set' : 
+    System.String User 'get set' : 
+  Events:
+    BrowseEvent Browse: 
+  Methods:
+    add_Browse(BrowseEvent): PrivateScope, Public, HideBySig, SpecialName
+    remove_Browse(BrowseEvent): PrivateScope, Public, HideBySig, SpecialName
+    get_Comment(): PrivateScope, Public, HideBySig, SpecialName
+    set_Comment(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Url(): PrivateScope, Public, HideBySig, SpecialName
+    set_Url(String): PrivateScope, Public, HideBySig, SpecialName
+    get_User(): PrivateScope, Public, HideBySig, SpecialName
+    set_User(String): PrivateScope, Public, HideBySig, SpecialName
+Class Quist.PreviewDlg+BrowseEvent: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    BeginInvoke(String, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask

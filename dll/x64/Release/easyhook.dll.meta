@@ -1,0 +1,187 @@
+Assembly EasyHook, Version=2.5.0.0, Culture=neutral, PublicKeyToken=4b580fca19d0b0c5: 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System.Runtime.Remoting, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Class EasyHook.InjectionLoader: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Main(String): PrivateScope, Public, Static, HideBySig
+Class EasyHook.RemoteHooking: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  Properties:
+    Boolean IsAdministrator 'get ' : 
+    Boolean IsX64System 'get ' : 
+  Methods:
+    WakeUpProcess(): PrivateScope, Public, Static, HideBySig
+    get_IsAdministrator(): PrivateScope, Public, Static, HideBySig, SpecialName
+    IpcCreateServer(String&, WellKnownObjectMode, WellKnownSidType[]): PrivateScope, Public, Static, HideBySig
+    IpcConnectClient(String): PrivateScope, Public, Static, HideBySig
+    Inject(Int32, InjectionOptions, String, String, Object[]): PrivateScope, Public, Static, HideBySig
+    Inject(Int32, String, String, Object[]): PrivateScope, Public, Static, HideBySig
+    IsX64Process(Int32): PrivateScope, Public, Static, HideBySig
+    GetProcessIdentity(Int32): PrivateScope, Public, Static, HideBySig
+    GetCurrentProcessId(): PrivateScope, Public, Static, HideBySig
+    GetCurrentThreadId(): PrivateScope, Public, Static, HideBySig
+    ExecuteAsService(String, Object[]): PrivateScope, Public, Static, HideBySig
+    CreateAndInject(String, String, Int32, String, String, Int32&(Out), Object[]): PrivateScope, Public, Static, HideBySig
+    get_IsX64System(): PrivateScope, Public, Static, HideBySig, SpecialName
+    InstallSupportDriver(): PrivateScope, Public, Static, HideBySig
+    InstallDriver(String, String): PrivateScope, Public, Static, HideBySig
+Interface EasyHook.RemoteHooking+IContext: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+  Properties:
+    Int32 HostPID 'get ' : 
+  Methods:
+    get_HostPID(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+Class EasyHook.HookAccessControl: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  Properties:
+    Boolean IsExclusive 'get ' : 
+    Boolean IsInclusive 'get ' : 
+  Methods:
+    get_IsExclusive(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsInclusive(): PrivateScope, Public, HideBySig, SpecialName
+    SetInclusiveACL(Int32[]): PrivateScope, Public, HideBySig
+    SetExclusiveACL(Int32[]): PrivateScope, Public, HideBySig
+    GetEntries(): PrivateScope, Public, HideBySig
+Class EasyHook.HookRuntimeInfo: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Boolean IsHandlerContext 'get ' : 
+    System.Object Callback 'get ' : 
+    EasyHook.LocalHook Handle 'get ' : 
+    System.Diagnostics.ProcessModule CallingUnmanagedModule 'get ' : 
+    System.Reflection.Assembly CallingManagedModule 'get ' : 
+    IntPtr ReturnAddress 'get ' : 
+    IntPtr AddressOfReturnAddress 'get ' : 
+    System.Diagnostics.ProcessModule[] UnmanagedStackTrace 'get ' : 
+    System.Reflection.Module[] ManagedStackTrace 'get ' : 
+  Methods:
+    get_IsHandlerContext(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Callback(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Handle(): PrivateScope, Public, Static, HideBySig, SpecialName
+    UpdateUnmanagedModuleList(): PrivateScope, Public, Static, HideBySig
+    PointerToModule(IntPtr): PrivateScope, Public, Static, HideBySig
+    get_CallingUnmanagedModule(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_CallingManagedModule(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_ReturnAddress(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_AddressOfReturnAddress(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_UnmanagedStackTrace(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_ManagedStackTrace(): PrivateScope, Public, Static, HideBySig, SpecialName
+Class EasyHook.LocalHook: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Runtime.ConstrainedExecution.CriticalFinalizerObject
+  Interfaces:
+    System.IDisposable
+  Properties:
+    System.Object Callback 'get ' : 
+    EasyHook.HookAccessControl ThreadACL 'get ' : 
+    EasyHook.HookAccessControl GlobalThreadACL 'get ' : 
+  Methods:
+    get_Callback(): PrivateScope, Public, HideBySig, SpecialName
+    get_ThreadACL(): PrivateScope, Public, HideBySig, SpecialName
+    IsThreadIntercepted(Int32): PrivateScope, Public, HideBySig
+    get_GlobalThreadACL(): PrivateScope, Public, Static, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Create(IntPtr, Delegate, Object): PrivateScope, Public, Static, HideBySig
+    CreateUnmanaged(IntPtr, IntPtr, IntPtr): PrivateScope, Public, Static, HideBySig
+    GetProcAddress(String, String): PrivateScope, Public, Static, HideBySig
+    GetProcDelegate(String, String): PrivateScope, Public, Static, HideBySig
+    EnableRIPRelocation(): PrivateScope, Public, Static, HideBySig
+    GetThreadIdByHandle(IntPtr): PrivateScope, Public, Static, HideBySig
+    GetProcessIdByHandle(IntPtr): PrivateScope, Public, Static, HideBySig
+    GetNameByHandle(IntPtr): PrivateScope, Public, Static, HideBySig
+Class EasyHook.NativeAPI: AutoLayout, AnsiClass, Class, Public, Abstract, Sealed, BeforeFieldInit
+  Fields:
+    Boolean Is64Bit : Public, Static, InitOnly
+    Int32 EASYHOOK_INJECT_DEFAULT : Public, Static
+    Int32 EASYHOOK_INJECT_MANAGED : Public, Static
+    Int32 MAX_HOOK_COUNT = 1024 : Public, Static, Literal, HasDefault
+    Int32 MAX_ACE_COUNT = 128 : Public, Static, Literal, HasDefault
+    Int32 STATUS_SUCCESS = 0 : Public, Static, Literal, HasDefault
+    Int32 STATUS_INVALID_PARAMETER = -1073741811 : Public, Static, Literal, HasDefault
+    Int32 STATUS_INVALID_PARAMETER_1 = -1073741585 : Public, Static, Literal, HasDefault
+    Int32 STATUS_INVALID_PARAMETER_2 = -1073741584 : Public, Static, Literal, HasDefault
+    Int32 STATUS_INVALID_PARAMETER_3 = -1073741583 : Public, Static, Literal, HasDefault
+    Int32 STATUS_INVALID_PARAMETER_4 = -1073741582 : Public, Static, Literal, HasDefault
+    Int32 STATUS_INVALID_PARAMETER_5 = -1073741581 : Public, Static, Literal, HasDefault
+    Int32 STATUS_NOT_SUPPORTED = -1073741637 : Public, Static, Literal, HasDefault
+    Int32 STATUS_INTERNAL_ERROR = -1073741595 : Public, Static, Literal, HasDefault
+    Int32 STATUS_INSUFFICIENT_RESOURCES = -1073741670 : Public, Static, Literal, HasDefault
+    Int32 STATUS_BUFFER_TOO_SMALL = -1073741789 : Public, Static, Literal, HasDefault
+    Int32 STATUS_NO_MEMORY = -1073741801 : Public, Static, Literal, HasDefault
+    Int32 STATUS_WOW_ASSERTION = -1073702760 : Public, Static, Literal, HasDefault
+    Int32 STATUS_ACCESS_DENIED = -1073741790 : Public, Static, Literal, HasDefault
+  Methods:
+    GetCurrentThreadId(): PrivateScope, Public, Static, HideBySig, PinvokeImpl
+    CloseHandle(IntPtr): PrivateScope, Public, Static, HideBySig, PinvokeImpl
+    GetCurrentProcessId(): PrivateScope, Public, Static, HideBySig, PinvokeImpl
+    GetProcAddress(IntPtr, String): PrivateScope, Public, Static, HideBySig, PinvokeImpl
+    LoadLibrary(String): PrivateScope, Public, Static, HideBySig, PinvokeImpl
+    GetModuleHandle(String): PrivateScope, Public, Static, HideBySig, PinvokeImpl
+    RtlCaptureStackBackTrace(Int32, Int32, IntPtr, IntPtr): PrivateScope, Public, Static, HideBySig, PinvokeImpl
+    RtlGetLastError(): PrivateScope, Public, Static, HideBySig
+    RtlGetLastErrorString(): PrivateScope, Public, Static, HideBySig
+    LhUninstallAllHooks(): PrivateScope, Public, Static, HideBySig
+    LhInstallHook(IntPtr, IntPtr, IntPtr, IntPtr): PrivateScope, Public, Static, HideBySig
+    LhUninstallHook(IntPtr): PrivateScope, Public, Static, HideBySig
+    LhWaitForPendingRemovals(): PrivateScope, Public, Static, HideBySig
+    LhIsThreadIntercepted(IntPtr, Int32, Boolean&(Out)): PrivateScope, Public, Static, HideBySig
+    LhSetInclusiveACL(Int32[], Int32, IntPtr): PrivateScope, Public, Static, HideBySig
+    LhSetExclusiveACL(Int32[], Int32, IntPtr): PrivateScope, Public, Static, HideBySig
+    LhSetGlobalInclusiveACL(Int32[], Int32): PrivateScope, Public, Static, HideBySig
+    LhSetGlobalExclusiveACL(Int32[], Int32): PrivateScope, Public, Static, HideBySig
+    LhBarrierGetCallingModule(IntPtr&(Out)): PrivateScope, Public, Static, HideBySig
+    LhBarrierGetCallback(IntPtr&(Out)): PrivateScope, Public, Static, HideBySig
+    LhBarrierGetReturnAddress(IntPtr&(Out)): PrivateScope, Public, Static, HideBySig
+    LhBarrierGetAddressOfReturnAddress(IntPtr&(Out)): PrivateScope, Public, Static, HideBySig
+    LhBarrierBeginStackTrace(IntPtr&(Out)): PrivateScope, Public, Static, HideBySig
+    LhBarrierEndStackTrace(IntPtr): PrivateScope, Public, Static, HideBySig
+    DbgAttachDebugger(): PrivateScope, Public, Static, HideBySig
+    DbgGetThreadIdByHandle(IntPtr, Int32&(Out)): PrivateScope, Public, Static, HideBySig
+    DbgGetProcessIdByHandle(IntPtr, Int32&(Out)): PrivateScope, Public, Static, HideBySig
+    DbgHandleToObjectName(IntPtr, IntPtr, Int32, Int32&(Out)): PrivateScope, Public, Static, HideBySig
+    RhInjectLibraryEx(Int32, Int32, Int32, String, String, IntPtr, Int32): PrivateScope, Public, Static, HideBySig
+    RhInjectLibrary(Int32, Int32, Int32, String, String, IntPtr, Int32): PrivateScope, Public, Static, HideBySig
+    RtlCreateSuspendedProcess(String, String, Int32, Int32&(Out), Int32&(Out)): PrivateScope, Public, Static, HideBySig
+    RhIsX64Process(Int32, Boolean&(Out)): PrivateScope, Public, Static, HideBySig
+    RhIsAdministrator(): PrivateScope, Public, Static, HideBySig
+    RhGetProcessToken(Int32, IntPtr&(Out)): PrivateScope, Public, Static, HideBySig
+    RhWakeUpProcess(): PrivateScope, Public, Static, HideBySig
+    RtlInstallService(String, String, String): PrivateScope, Public, Static, HideBySig
+    RhInstallDriver(String, String): PrivateScope, Public, Static, HideBySig
+    RhInstallSupportDriver(): PrivateScope, Public, Static, HideBySig
+    RhIsX64System(): PrivateScope, Public, Static, HideBySig
+    GacCreateContext(): PrivateScope, Public, Static, HideBySig
+    GacReleaseContext(IntPtr&): PrivateScope, Public, Static, HideBySig
+    GacInstallAssembly(IntPtr, String, String, String): PrivateScope, Public, Static, HideBySig
+    GacUninstallAssembly(IntPtr, String, String, String): PrivateScope, Public, Static, HideBySig
+Class EasyHook.HelperServiceInterface: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.MarshalByRefObject
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    InjectEx(Int32, Int32, Int32, Int32, String, String, Boolean, Boolean, Object[]): PrivateScope, Public, HideBySig
+    ExecuteAsService(String, Object[]): PrivateScope, Public, HideBySig
+    BeginInjection(Int32): PrivateScope, Public, Static, HideBySig
+    EndInjection(Int32): PrivateScope, Public, Static, HideBySig
+    WaitForInjection(Int32): PrivateScope, Public, Static, HideBySig
+    InjectionException(Int32, Exception): PrivateScope, Public, HideBySig
+    InjectionCompleted(Int32): PrivateScope, Public, HideBySig
+    Ping(): PrivateScope, Public, HideBySig
+Interface EasyHook.IEntryPoint: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
+Struct EasyHook.InjectionOptions: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    EasyHook.InjectionOptions Default = 0 : Public, Static, Literal, HasDefault
+    EasyHook.InjectionOptions NoService = 1 : Public, Static, Literal, HasDefault
+    EasyHook.InjectionOptions NoWOW64Bypass = 2 : Public, Static, Literal, HasDefault
+Class EasyHook.Config: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Register(String, String[]): PrivateScope, Public, Static, HideBySig
+    PrintError(String, Object[]): PrivateScope, Public, Static, HideBySig (Obsolete)
+    PrintWarning(String, Object[]): PrivateScope, Public, Static, HideBySig (Obsolete)
+    PrintComment(String, Object[]): PrivateScope, Public, Static, HideBySig (Obsolete)
+    DebugPrint(EventLogEntryType, String, Object[]): PrivateScope, Public, Static, HideBySig (Obsolete)
+    RunCommand(String, Boolean, Boolean, String, String): PrivateScope, Public, Static, HideBySig (Obsolete)

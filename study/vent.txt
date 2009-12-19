@@ -1,0 +1,3 @@
+0044cc9d - case for send page
+
+0042EBA0 - function to send page (call with id)

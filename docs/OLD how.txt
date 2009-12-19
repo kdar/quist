@@ -1,0 +1,60 @@
+Why:
+I wanted to make a menu item to open a web browser to the url in someone's comment.
+
+------------------------------------
+How I found location to jump for menu items:
+1. Set a breakpoint on SetClipboardData.
+2. Run ventrilo, and click on Copy comment url
+3. You will see exactly where it is putting the url into the clipboard. 
+4. We use a resource editor to find out what id is given to the Copy comment url menu item command. It is given the
+   id of 32857, or 0x8059 in hex.
+5. We notice where we broke, we aren't in the case of 0x8059. We are in the case 0x8032. So now we need to find
+   the location that was jumped to here. So we keep moving or selection upwards and we see a CloseClipboard call there.
+   By selecting this location we also see that it is jumped to from two locations (possibly from Copy comment and Copy comment url? YES!)
+6. Right-click, go to the submenu Go to, then click the last jmp location.
+7. Scroll up a bit and now we see we are in the case of 0x8059 (Copy comment url).
+8. Select the case 0x8059 line in ollydbg, right click > go to > Default case.
+9. You will now be at the default case of the switch where you should see a cmp eax, 4E20.
+10. This is the location I override with a jump to my code. After all commands/menu items/etc.. are done this section
+    of code is executed. 
+    
+So it is easy now to add our own menu items and check if they were called here. The beauty of ventrilo is it won't 
+error if it gets a command id it doesn't know about.
+
+------------------------------------
+How to add our own code:
+1. Use zeroadd to add our own section and note this location.
+2. In the location above, make a jmp to this new section of code. We must remember that cmp instruction we replaced because
+   we must call it before we jmp back after calling our code.
+
+Here is the code I have there with explainations:
+
+Variable locations:
+hack = 556110 - address where we save the memory location of our hack function in the dll
+dllname = 556120 - the ascii text "creventdll.dll"
+funcname = 556130 - the ascii text "hack"
+
+entry:
+PUSHAD                                   ; We save all the variables so we can restore them after modification
+MOV     EDX, EAX                         ; EAX contains the command/menu id. Save it so we can pass it to our dll function
+MOV     EBX, DWORD PTR DS:[hack]         ; Move into ebx the address of our hack function
+CMP     EBX, 0                           ; Do we actually have the address in here?
+JNZ     SHORT callfunc                   ; If we do, then just call callfunc, if not then get that address.
+PUSH    dllname                          ; LoadLibrary's parameter: "creventdll.dll"
+CALL    NEAR DWORD PTR DS:[4E72C4]       ; call kernel32.LoadLibraryA
+PUSH    funcname                         ; GetProcAddress's parameter 2: "hack"
+PUSH    EAX                              ; GetProcAddress's parameter 1: address of creventdll.dll retrieved from LoadLibrary
+CALL    NEAR DWORD PTR DS:[4E72C8]       ; call kernel32.GetProcAddress
+MOV     EBX, EAX                         ; Save the address of the hack function in ebx
+MOV     DWORD PTR DS:[hack], EBX         ; Save the hack function address in memory
+
+callfunc:
+PUSH    EDX                              ; hack's parameter: the command id
+CALL    EBX                              ; call hack
+ADD     ESP, 4                           ; Clean up the stack, since hack is a __cdecl function
+
+finish:
+POPAD                                    ; Restore all the variables we destroyed
+CMP     EAX, 4E20                        ; This is the code we replaced to jmp into our code. So call it here.
+JMP     CreVentr.0044E375                ; jmp back to the place where we jumped into our code.
+
